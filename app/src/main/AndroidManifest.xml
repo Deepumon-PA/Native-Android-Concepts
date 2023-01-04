@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.deepu.myandroidapp">
+
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" /> <!-- needed in api levels 33 and abpve -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-feature
+        android:name="android.hardware.sensor.gyroscope"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
+    <application
+        android:name="com.deepu.z_learn.workManager.DownloadApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MyAndroidApp"
+        android:usesCleartextTraffic="true">
+        <profileable
+            android:shell="true"
+            tools:targetApi="29" />
+
+        <activity
+            android:name="com.deepu.z_learn.dataBinding.DataBindingActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.MyAndroidApp.NoActionBar" />
+        <activity android:name="com.deepu.z_learn.LearnActivity" />
+        <activity android:name="com.deepu.z_learn.eventBus.EventBusDemoActivity" />
+        <activity android:name="com.deepu.z_learn.supportAllScreenSizes.SupportComposeScreenSizesActivity" />
+        <activity android:name="com.deepu.z_learn.translateText.TranslateTextActivity" />
+        <activity
+            android:name="com.deepu.z_learn.workManager.WorkMangerDemoActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.deepu.z_learn.dataStoreAndEncryption.DataStoreDemoActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.deepu.z_learn.securingkeysUsingNDK.HideKeyUsingNDKActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.deepu.z_learn.roomMigration.RoomMigrationActivity"
+            android:exported="true"/>
+        <activity
+            android:name="com.deepu.z_learn.pictureInPictureCompose.PictureInPictureActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:exported="true"
+            android:label="PictureInPictureMode"
+            android:supportsPictureInPicture="true"/>
+
+        <receiver android:name="com.deepu.z_learn.pictureInPictureCompose.PictureInPictureActivity$PiPActionReceiver" />
+
+        <activity
+            android:name="com.deepu.z_learn.notificationPermission33plus.NotificationPermissionChangesActivity"
+            android:exported="true"/>
+        <activity
+            android:name="com.deepu.z_learn.measureAppPerformance_ImproveUsingBaseLineProfiles.AppPerformanceActivity"
+            android:exported="true"/>
+        <activity android:name="com.deepu.z_learn.protoDataStore.ProtoDataStoreActivity"  android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.deepu.z_learn.executeCodeOnBootUp.ExecuteOnBootCompletedActivity"
+            android:exported="true"/>
+
+        <receiver android:name="com.deepu.z_learn.executeCodeOnBootUp.BootCompletedReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>

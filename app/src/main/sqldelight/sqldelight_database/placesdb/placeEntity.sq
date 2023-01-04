@@ -1,0 +1,17 @@
+CREATE TABLE placeEntity(
+ id INTEGER NOT NULL PRIMARY KEY,
+ placeName TEXT NOT NULL,
+ CountryName TEXT NOT NULL
+);
+
+getPlaceById: SELECT * FROM placeEntity WHERE id = :id;
+
+getAllPlaces: SELECT * FROM placeEntity;
+
+insertPlace: INSERT OR REPLACE INTO placeEntity VALUES (?, ?, ?);
+
+deletePlaceById: DELETE FROM placeEntity WHERE id = :id;
+
+
+
+

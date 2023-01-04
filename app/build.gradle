@@ -1,0 +1,362 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+//    id 'com.google.gms.google-services'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlinx-serialization'
+    id 'org.jetbrains.kotlin.plugin.serialization'
+//    id 'maven-publish' //for publishing your own libraries
+
+    id 'com.squareup.sqldelight'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+
+    //proto data store
+    id "com.google.protobuf" version "0.8.17"
+}
+
+android {
+    compileSdk 33
+    buildToolsVersion "31.0.0"
+
+    //enabling data binding for the project
+    dataBinding {
+        enabled true
+    }
+
+    defaultConfig {
+        applicationId "com.deepu.myandroidapp"
+        minSdk 24
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled = true
+
+        buildConfigField("String", "PB_API_KEY", PB_API_KEY)
+// referring to the pixabay api added in the gradle properties file
+
+        /*  //or if you want to get it directly from properties file
+          val properties = new Properties()
+          properties.load(project.rootProject.file("local.properties").newDataInputStream())
+
+          buildConfigField "String","MY_SECRET_KEY", "\"${properties.getProperty("MY_SECRET_KEY")}\""*/
+
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+
+        kapt {
+            arguments {
+                // for room migration...room will save json file corresponding to a specific database version (after changing schema each time)
+                arg("room.schemaLocation", "$projectDir/schemas")
+            }
+        }
+    }
+
+    packagingOptions {
+        exclude "**/attach_hotspot_windows.dll"
+        exclude "META-INF/licenses/**"
+        exclude "META-INF/AL2.0"
+        exclude "META-INF/LGPL2.1"
+    }
+
+    /* externalNativeBuild{
+         cmake{
+             path "CMakeLists.txt"
+         }
+     }*/
+
+    buildTypes {
+        release { // will only apply to the release builds
+            minifyEnabled true //set to true when releasing, it will optimize and obfuscate code
+//            shrinkResources true
+            shrinkResources = true //eliminate unused resources
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        benchmark {
+            signingConfig signingConfigs.debug
+            matchingFallbacks = ['release']
+            debuggable false
+        }
+
+
+//        myVariant{ // can create our own build variants like this {and set rules for it} , goto Build:Select Build variant: to select variants when building
+//
+//        }
+
+        // if minifyEnabled is set to true code will be obfuscated and won't be readable in case of a crash report after release
+        // for that you can go to project level view: app : build: outputs: mapping: mapping.txt to see compare the mapping changes made
+
+//        customDebug{
+//            initWith debug // will use the features of the current debug variant, else use debuggable true
+//            applicationIdSuffix ".customDebug"
+//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+//        }
+    }
+
+    //product flavours
+//    flavourDimensions "dev" // group which contains all product flavours
+
+//    def BASE_URL = "BASE_URL"
+//    productFlavors{
+//        flavour1{
+//            dimension "dev"
+//            applicationIdSuffix ".flavour1"
+//            buildConfigField "String", BASE_URL, "www.yahoo.com"
+//
+//        }
+//
+//        flavour2{
+//            dimension "dev"
+//            applicationIdSuffix ".flavour2"
+//            buildConfigField "String", BASE_URL, "www.google.com"
+//        }
+//    }
+
+    //ignore variant to ignore a particular build variant
+
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+//        useIR = true // removed from kotlin 1.7.0 onwards
+    }
+
+    buildFeatures {
+        compose = true
+        viewBinding = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.3.2"
+    }
+}
+
+kapt {
+    correctErrorTypes true
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:21.7"
+    }
+
+    // Generates the java Protobuf-lite code for the Protobufs in this project. See
+    // https://github.com/google/protobuf-gradle-plugin#customizing-protobuf-compilation
+    // for more information.
+    generateProtoTasks {
+        all().each { task ->
+            task.builtins {
+                java {
+                    option 'lite'
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
+    implementation 'androidx.activity:activity-compose:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    // Local unit tests
+    testImplementation "androidx.test:core:1.4.0"
+    testImplementation "junit:junit:4.13.2"
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4"
+    testImplementation "com.google.truth:truth:1.1.3"
+    testImplementation "com.squareup.okhttp3:mockwebserver:4.9.1"
+    testImplementation "io.mockk:mockk:1.10.5"
+    debugImplementation "androidx.compose.ui:ui-test-manifest:1.4.0-alpha02"
+
+    // Instrumentation tests
+    androidTestImplementation 'com.google.dagger:hilt-android-testing:2.37'
+    kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.38.1'
+    androidTestImplementation "junit:junit:4.13.2"
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4"
+    androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
+    androidTestImplementation "com.google.truth:truth:1.1.3"
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test:core-ktx:1.4.0'
+    androidTestImplementation "com.squareup.okhttp3:mockwebserver:4.9.1"
+    androidTestImplementation "io.mockk:mockk-android:1.10.5"
+    androidTestImplementation 'androidx.test:runner:1.4.0'
+
+
+    //Compose
+    implementation "androidx.compose.material:material:1.3.0-rc01"
+    implementation "androidx.compose.compiler:compiler:1.3.2"
+    implementation "androidx.compose.ui:ui-tooling-preview:1.3.0-rc01"
+    implementation 'androidx.activity:activity-compose:1.6.0'
+    debugImplementation "androidx.compose.ui:ui-tooling:1.3.0-rc01"
+
+    /*implementation "androidx.compose.ui:ui:1.3.2"
+    implementation "androidx.compose.material:material:1.3.2"
+    implementation "androidx.compose.ui:ui-tooling-preview:1.3.2"
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:1.3.2"*/
+//    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
+
+    //compose live data
+    implementation 'androidx.compose.runtime:runtime-livedata:1.4.0-alpha02'
+
+
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.8.0'
+
+    //ViewModel and LiveData
+    def lifecycle_version = "2.2.0"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
+
+    //coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+
+
+    // Room
+    def room_version = "2.4.3"
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-ktx:$room_version" // coroutine support for room
+    androidTestImplementation "androidx.room:room-testing:$room_version"
+
+    //Dagger - Hilt
+    implementation "com.google.dagger:hilt-android:2.38.1"
+    kapt "com.google.dagger:hilt-android-compiler:2.38.1"
+    implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
+
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
+    kapt "androidx.hilt:hilt-compiler:1.0.0"
+    kapt 'androidx.hilt:hilt-compiler:1.0.0'
+    implementation 'androidx.hilt:hilt-navigation-fragment:1.0.0'
+
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.8.0'
+
+    //navigation
+    implementation "androidx.navigation:navigation-compose:2.6.0-alpha04" //navigation with compose
+
+    //multidexing
+    implementation("androidx.multidex:multidex:2.0.1")
+
+    //ktor
+//    implementation 'io.ktor:ktor-client-android:1.5.0'
+//    implementation 'io.ktor:ktor-client-serialization:1.5.0'
+//    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2'
+//    implementation 'io.ktor:ktor-client-logging-jvm:1.5.0'
+    def ktor_version = "1.6.3"
+    implementation "io.ktor:ktor-client-core:$ktor_version" //
+    implementation "io.ktor:ktor-client-android:$ktor_version"
+    implementation "io.ktor:ktor-client-serialization:$ktor_version"
+    implementation "io.ktor:ktor-client-logging:$ktor_version"
+    implementation "ch.qos.logback:logback-classic:1.2.3"
+
+    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2'
+
+
+    //coil: image loading library for compose from kotlin
+    implementation("io.coil-kt:coil-compose:1.3.1")
+
+    //work manager
+    def work_version = "2.7.1"
+    implementation "androidx.work:work-runtime-ktx:$work_version"
+    //Future callback for WorkManager
+    implementation "androidx.concurrent:concurrent-futures-ktx:1.1.0"
+
+    //paging
+    def paging_version = "3.1.1"
+    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
+
+    // optional - Guava ListenableFuture support
+    implementation "androidx.paging:paging-guava:$paging_version"
+
+    // optional - Jetpack Compose paging integration
+    implementation "androidx.paging:paging-compose:1.0.0-alpha17"
+
+    //Datastore Typed
+    implementation "androidx.datastore:datastore:1.0.0"
+    implementation  "com.google.protobuf:protobuf-javalite:3.18.0"
+
+    //These dependencies are needed for protoDataStore
+    implementation "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5"
+    // if we want to store lists
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2"
+
+    //Datastore Preferences
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
+
+    // Agora Video calling
+    implementation "com.github.AgoraIO-Community:Android-UIKit:v2.0.0"
+
+    //google's library to handle permissions easily in compose
+    implementation "com.google.accompanist:accompanist-permissions:0.21.1-beta"
+
+    // SQL Delight
+    def sql_delight_version = "1.5.4"
+    implementation "com.squareup.sqldelight:android-driver:$sql_delight_version"
+    implementation "com.squareup.sqldelight:coroutines-extensions-jvm:$sql_delight_version"
+
+    //to get lifecycle operations(when launching flows in coroutines)
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
+
+    // Koin
+    def koin_version = "2.0.1"
+    implementation "org.koin:koin-android:$koin_version"
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+    implementation "org.koin:koin-androidx-scope:$koin_version"
+
+    //Event Bus
+    implementation "org.greenrobot:eventbus:3.3.1"
+
+    //Rxjava
+    implementation "io.reactivex.rxjava3:rxjava:3.1.3" //rxjava
+
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0' //rx android
+
+    //ML Kit for text language translation
+    implementation 'com.google.mlkit:translate:17.0.1'
+
+    //base line profiles
+    implementation "androidx.profileinstaller:profileinstaller:1.3.0-alpha02"
+
+}
+
+sqldelight {
+    PlacesDataBase {
+        packageName = "com.deepu.myandroidapp"
+    }
+}
+
+
+// for publishing your own libraries
+/*
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = "com.github.yourgithubusername"
+
+                artifactId = "enter how your project want to be called (eg: )"
+                version = "1.0"
+            }
+        }
+    }
+}
+
+*/

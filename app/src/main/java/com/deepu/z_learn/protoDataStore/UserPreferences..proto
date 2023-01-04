@@ -1,0 +1,6 @@
+
+
+message UserPreferences {
+  optional bool optionalValue = 1;
+  required bool requiredValue = 2;
+}
