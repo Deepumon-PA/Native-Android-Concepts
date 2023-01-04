@@ -21,6 +21,7 @@ import androidx.compose.ui.graphics.Color
 //uses protocol buffers (language neutral, platform neutral mechanism for serializing structured data)(faster, smaller and simpler than xml)
 
 class ProtoDataStoreActivity: ComponentActivity() {
+    //test
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
