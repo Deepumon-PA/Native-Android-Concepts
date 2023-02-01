@@ -1,6 +1,6 @@
 
 
 message UserPreferences {
-  optional bool optionalValue = 1;
-  required bool requiredValue = 2;
+  optional bool isChecked = 1;
+  required string inputText = 2;
 }

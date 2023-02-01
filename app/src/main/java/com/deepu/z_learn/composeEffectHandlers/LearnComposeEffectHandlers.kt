@@ -55,6 +55,7 @@ class LearnEffectHandlerActivity : ComponentActivity() {
 
                 //1.Launched effect
 
+                // below whenever the value of text changes coroutine will be cancelled and relaunched
                 LaunchedEffect(key1 = text) {
                     //launched effect is a composable and  by default it provides a coroutine scope
                     delay(1000L)
@@ -62,7 +63,8 @@ class LearnEffectHandlerActivity : ComponentActivity() {
 
                 }
 
-                LaunchedEffect(key1 = true) {   //fixed value true makes sure that it is never relaunched after each composition but only the first time
+                //fixed value true makes sure that it is never relaunched after each composition but only the first time
+                LaunchedEffect(key1 = true) {
                     effectHandlerViewModel.sharedFlow.collect { event ->
                         when (event) {
 
@@ -95,7 +97,7 @@ class LearnEffectHandlerActivity : ComponentActivity() {
                 }
 
                 LaunchedEffect(key1 = counter) { /*Here when the counter value changes
-           the following code will get cancelled and relaunched with new line */
+           the following code will get cancelled and relaunched with new value */
                     animate.animateTo(counter.toFloat())
                 }
 
@@ -156,7 +158,7 @@ class LearnEffectHandlerActivity : ComponentActivity() {
 
                 /*
                 Here you can't use LaunchedEffect since the observer needs to be cleaned up or disposed
-            
+
                  */
                 DisposableEffect(key1 = lifeCycleOwner){
 

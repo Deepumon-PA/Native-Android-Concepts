@@ -6,7 +6,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
-import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import kotlin.reflect.KProperty
 
@@ -38,6 +37,7 @@ open class Base2
 
     }
 }
+
 class Derived: Base(){
 
 }
@@ -112,11 +112,9 @@ class DeepLinkHandlerImpl: DeepLinkHandler{
     override fun handleDeepLink(activity: Activity?, intent: Intent?) {
         //do something
     }
-
 }
 
-
-//----------------PROPERTY DELEGATION----------------------------------------------------
+//-------------------------------PROPERTY DELEGATION---------------------------------------------
 //we can customize the behaviour of a property using property delegation
 //for eg: change the getter and setter of a property
 

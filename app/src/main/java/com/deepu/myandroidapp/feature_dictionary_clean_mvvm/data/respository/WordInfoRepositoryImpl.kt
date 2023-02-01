@@ -1,6 +1,5 @@
 package com.deepu.myandroidapp.feature_dictionary_clean_mvvm.data.respository
 
-import android.util.Log
 import com.deepu.myandroidapp.feature_dictionary_clean_mvvm.core.util.Resource
 import com.deepu.myandroidapp.feature_dictionary_clean_mvvm.data.local.WordInfoDao
 import com.deepu.myandroidapp.feature_dictionary_clean_mvvm.data.remote.DictionaryApi
@@ -29,8 +28,6 @@ class WordInfoRepositoryImpl(
             dao.insertWordInfo(remoteWordInfos.map { it.toWordInfoEntity() })
 
         } catch (e: HttpException) {
-            Log.d("thisistheexc", "exception: ${e}")
-
             emit(
                 Resource.Error(
                     data = wordInfos,

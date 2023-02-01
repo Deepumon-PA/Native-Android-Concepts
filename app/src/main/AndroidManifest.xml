@@ -65,11 +65,6 @@
             android:name="com.deepu.z_learn.measureAppPerformance_ImproveUsingBaseLineProfiles.AppPerformanceActivity"
             android:exported="true"/>
         <activity android:name="com.deepu.z_learn.protoDataStore.ProtoDataStoreActivity"  android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name="com.deepu.z_learn.executeCodeOnBootUp.ExecuteOnBootCompletedActivity"
             android:exported="true"/>
@@ -80,6 +75,13 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
+        <activity android:name="com.deepu.z_learn.stateInCompose.StateInComposeActivity" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

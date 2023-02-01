@@ -80,6 +80,7 @@ fun main() {
     lambdaAcceptor("go", "forward", concatenateLambda)
 
 
+
     //-----------------------------kotlin filter and map lambda operators-----------------------------------------
     val myFriends = listOf<Person>(
         Person("Deepu", 27, 164),

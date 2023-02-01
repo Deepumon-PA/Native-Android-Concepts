@@ -36,7 +36,6 @@ class DataBindingActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
         binding.bindViewModel = dataBindingViewModel
 
-
         binding.btn1.setOnClickListener {
             Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show()
             //------------------RANDOM NUMBER GENERATION-WITHIN A LIMIT

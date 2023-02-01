@@ -1,7 +1,7 @@
 package com.deepu.z_learn
 
 /**
-   This file will contain theoretical information of technical concepts
+   This file contains theoretical information of technical concepts
  **/
 
 

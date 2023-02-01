@@ -4,12 +4,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Checkbox
-import androidx.compose.material.CheckboxDefaults
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -21,7 +19,6 @@ import androidx.compose.ui.graphics.Color
 //uses protocol buffers (language neutral, platform neutral mechanism for serializing structured data)(faster, smaller and simpler than xml)
 
 class ProtoDataStoreActivity: ComponentActivity() {
-    //test
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,21 +26,37 @@ class ProtoDataStoreActivity: ComponentActivity() {
         setContent {
             val isChecked = remember {
                 mutableStateOf(false)
-            };
-            MaterialTheme(){
+            }
+            val input = remember {
+                mutableStateOf("")
+            }
+            MaterialTheme {
                 Column(
                     modifier = Modifier.fillMaxSize(),
-                    verticalArrangement = Arrangement.SpaceBetween,
+                    verticalArrangement = Arrangement.SpaceEvenly,
                     horizontalAlignment = CenterHorizontally
                 ) {
                     Text(text = "DataStore preferences and proto datastore",
                         color = Color.White, modifier = Modifier.align(CenterHorizontally))
-                    Checkbox(checked = isChecked.value, onCheckedChange = {
-                        isChecked.value = it;
-                    }, colors = CheckboxDefaults.colors(
-                        checkedColor = Color.Red,
-                        uncheckedColor = Color.White
-                    ))
+
+                    TextField(colors = TextFieldDefaults.textFieldColors(textColor = Color.White), value = input.value , onValueChange = {
+                        input.value  = it
+                    }, label = {
+                        Text("Enter text here", color = Color.White)
+                    })
+
+                   Row(
+                       horizontalArrangement = Arrangement.Center,
+                       verticalAlignment = Alignment.CenterVertically
+                   ){
+                       Text(text = "Save?", color = Color.Blue)
+                       Checkbox(checked = isChecked.value, onCheckedChange = {
+                           isChecked.value = it;
+                       }, colors = CheckboxDefaults.colors(
+                           checkedColor = Color.Red,
+                           uncheckedColor = Color.White
+                       ))
+                   }
                 }
             }
         }
