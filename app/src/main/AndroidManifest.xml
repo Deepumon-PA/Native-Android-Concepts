@@ -76,6 +76,11 @@
             </intent-filter>
         </receiver>
         <activity android:name="com.deepu.z_learn.stateInCompose.StateInComposeActivity" android:exported="true">
+        </activity>
+
+        <activity android:name="com.deepu.z_learn.requestPermissions.RequestPermissionActivity" android:exported="true"/>
+
+        <activity android:name="com.deepu.z_learn.shareURLwithOtherApps.ShareURLWithOtherAppsActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

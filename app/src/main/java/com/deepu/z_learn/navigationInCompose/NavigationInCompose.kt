@@ -1,5 +1,15 @@
 package com.deepu.z_learn.navigationInCompose
 
+import androidx.compose.compiler.plugins.kotlin.EmptyFunctionMetrics.composable
+import androidx.compose.material.Button
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+
 /**
  * Navigation with compose
  */
@@ -48,8 +58,9 @@ navController.navigate("search") {
     launchSingleTop = true
 }
 
+*/
 
-Navigate calls triggered by other composable functions
+//Navigate calls triggered by other composable functions
 @Composable
 fun MyAppNavHost(
     modifier: Modifier = Modifier,
@@ -65,9 +76,9 @@ fun MyAppNavHost(
             ProfileScreen(
                 onNavigateToFriends = { navController.navigate("friendsList") },
 
-            )
+                )
         }
-        composable("friendslist") { FriendsListScreen() }
+        composable("friendslist") { /*FriendsListScreen()*/ }
     }
 }
 
@@ -75,11 +86,30 @@ fun MyAppNavHost(
 fun ProfileScreen(
     onNavigateToFriends: () -> Unit,
 
-) {
+    ) {
 
     Button(onClick = onNavigateToFriends) {
         Text(text = "See friends list")
     }
 }
 
-*/
+//Navigating with arguments
+
+/*
+@Composable
+fun NC2(){
+    NavHost(
+
+        startDestination = "profile/{userId}"
+    ) {
+        composable("profile") {
+            ProfileScreen(
+                onNavigateToFriends = { navController.navigate("friendsList") },
+
+                )
+        }
+        composable("friendslist") { */
+/*FriendsListScreen()*//*
+ }
+    }
+}*/

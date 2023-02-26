@@ -54,7 +54,7 @@ class StateDemoViewModel : ViewModel() {
     val name: LiveData<String> = _name
 
     fun onNameChange(newName: String) {
-      _name.value = newName
+        _name.value = newName
     }
 }
 
@@ -62,7 +62,7 @@ class StateDemoViewModel : ViewModel() {
 @Composable
 fun StateDemoHome(stateDemoViewModel: StateDemoViewModel = viewModel()) {
     //observeAsState is also functions like rememberState
- val name: String by  stateDemoViewModel.name.observeAsState("")
+    val name: String by stateDemoViewModel.name.observeAsState("")
 
 /*
     var name by remember {
