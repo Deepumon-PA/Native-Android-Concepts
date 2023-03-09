@@ -44,7 +44,7 @@ class BackingPropertyDemo {
 class Backing {
 
     fun backingDemo() {
-        var backingDemo = BackingPropertyDemo()
+        val backingDemo = BackingPropertyDemo()
         backingDemo.age = 30
     }
 
@@ -93,10 +93,12 @@ fun main() {
     val filteredList = myFriends.filter { person -> person.name.startsWith("R") }
 //    print(filteredList)
     val mappedList = myFriends.filter { it.name.endsWith("u") }
-        .map { person -> person.name }// define the operations inside lambda and it will return the appropriate list
+        .map { person -> person.name } //define the operations inside lambda and it will return the appropriate list
 //    print(mappedList)
 
     //-------------------kotlin scope functions let, apply, run, with and also-----------------------------------
+
+    //scope functions: allows you to perform operations on an object without modifying its existing state (by creating a temporary scope to perform this operations)
     val cart = Cart()
 
     //with returns a lambda result
@@ -107,7 +109,7 @@ fun main() {
     }
 
     //apply is similar as with but it returns the context object and it can access the member functions of the class
-    cart.apply {
+     cart.apply {
         itemName = "Samsung"
         itemCount = 6
     }.addTwoNumbers()
@@ -119,12 +121,11 @@ fun main() {
     }
 
     with(secondCartObject) {
-//        print("printing item name $itemName")
-//        print("printing item count $itemCount")
+        print("printing item name $itemName")
+        print("printing item count $itemCount")
     }
 
     val mySampleList = mutableListOf(1, 3, 5, 7)
-
 
     //also returns a list as well
     val modifiedList = mySampleList.also {
@@ -132,13 +133,22 @@ fun main() {
 //        print(it)
     }
 
+    //unlike apply also returns the original object, not a modified object
     val duplicateCardObject =
-        cart.also {  // returns a new modified object, can perform some more operations on the object
+        cart.also {   // returns a new modified object, can perform some more operations on the object
             it.itemCount = 50
         }
-    //let, already knows it that is enough, most important usage is for null safety used along with null safety operator ?
 
-    //run function is a combination of both with and let
+    secondCartObject.let {
+        it.itemCount = 20
+        "hello"
+    }
+
+
+    //let, This function allows you to perform operations on a non-null object within a scope. It takes a lambda expression as a parameter and passes the object as an argument to the lambda expression.
+    // most important usage is for null safety used along with null safety operator ?
+
+    //run function is a combination of both with and let-
     secondCartObject.run {
         itemName = "Hp Laptop"
         itemCount = 5
@@ -185,7 +195,6 @@ fun main() {
     //String stringValue = cursor.getString
     //cursor.close
     //db.close
-
 
 }
 
@@ -683,4 +692,3 @@ fun labelAlternativeInKotlin(args: Array<String>) {
 //livedata.switchMap( changedValue -> ) will trigger when live data changes
 
 //use "cachedIn(viewModelScope)" in view model inorder to cache (especially while paging, use this to get already loaded data from the memory on configuration changes like screen rotation)
-

@@ -1,4 +1,4 @@
-package com.deepu.z_learn.measureAppPerformance_ImproveUsingBaseLineProfiles
+package com.deepu.z_learn.measureAppPerformance_using_benchmark_ImproveUsingBaseLineProfiles
 
 //measure your apps performance including
 /*
@@ -12,12 +12,9 @@ package com.deepu.z_learn.measureAppPerformance_ImproveUsingBaseLineProfiles
 //in itself it is basically an instrumented test
 
 
-
-
 // test result  value comparison
 
 /*
-
 
   for startup test , check the medium value, which is the average of both min and max values
 
@@ -50,9 +47,4 @@ can do it for libraries as well (example: jetpack compose uses it)
 //How to implement
 //Generate for your application, or generate and distribute rules with your library
 
-//for eg jetpack compose uses BaseLineProfiles(Unbundled), it is added as a library rather than bundled into android
-//
-
-
-
- */
+*/

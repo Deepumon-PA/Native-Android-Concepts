@@ -43,7 +43,7 @@ class ExampleStartupBenchmark {
         packageName = "com.deepu.myandroidapp",
         metrics = listOf(FrameTimingMetric()),
         iterations = 5,
-        startupMode = StartupMode.COLD // launch the app with a fresh start
+        startupMode = StartupMode.COLD
     ) {
         pressHome()
         startActivityAndWait()

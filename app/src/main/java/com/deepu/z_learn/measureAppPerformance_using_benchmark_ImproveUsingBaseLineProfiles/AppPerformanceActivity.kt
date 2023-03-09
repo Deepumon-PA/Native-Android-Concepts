@@ -1,4 +1,4 @@
-package com.deepu.z_learn.measureAppPerformance_ImproveUsingBaseLineProfiles
+package com.deepu.z_learn.measureAppPerformance_using_benchmark_ImproveUsingBaseLineProfiles
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
