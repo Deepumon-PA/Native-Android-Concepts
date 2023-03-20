@@ -9,7 +9,6 @@ import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 import org.koin.dsl.module
 
-@HiltAndroidApp
 open class MyApplication: Application(){
     override fun onCreate() {
         super.onCreate()

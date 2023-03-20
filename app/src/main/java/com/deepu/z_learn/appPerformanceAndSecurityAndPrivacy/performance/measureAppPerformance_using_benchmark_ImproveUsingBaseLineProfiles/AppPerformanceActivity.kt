@@ -1,4 +1,4 @@
-package com.deepu.z_learn.measureAppPerformance_using_benchmark_ImproveUsingBaseLineProfiles
+package com.deepu.z_learn.appPerformanceAndSecurityAndPrivacy.performance.measureAppPerformance_using_benchmark_ImproveUsingBaseLineProfiles
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -34,6 +34,7 @@ class AppPerformanceActivity : ComponentActivity() {
                     }
 
                     val navController = rememberNavController()
+
                     NavHost(
                         navController = navController,
                         startDestination = "start",

@@ -1,4 +1,4 @@
-package com.deepu.z_learn.measureAppPerformance_using_benchmark_ImproveUsingBaseLineProfiles
+package com.deepu.z_learn.appPerformanceAndSecurityAndPrivacy.performance.measureAppPerformance_using_benchmark_ImproveUsingBaseLineProfiles
 
 //measure your apps performance including
 /*

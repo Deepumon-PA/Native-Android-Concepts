@@ -1,4 +1,4 @@
-package com.deepu.z_learn.appPerformanceAndSecurity.performance
+package com.deepu.z_learn.appPerformanceAndSecurityAndPrivacy.performance
 
 /**
 what all things to consider
@@ -42,3 +42,21 @@ what all things to consider
  */
 
 // Benchmarking your app
+
+/**
+ * Measuring Jank and startup with MacroBenchmarks
+ */
+
+//What is janking?
+//most phones run at a refresh rate of 60Hz per second, ie it redraws/ refreshes a frame/image 60 times a second
+//so if some screens are lagging or is taking more time to load/inflate then it will fall down behind the 60Hz mark and result in Janking
+
+//Why bother about app startup?
+//More time taken for app startup will lead to poor user experience
+
+//How to tackle these?
+//existing microbenchmark focuses on CPU rules and other common measuring mistakes
+//so android now has Macrobenchmark which can measure startup and jank (most importantly startup and scrolling measurements)
+
+//How does it work?
+// cold start the app -> compilation is in prograss
