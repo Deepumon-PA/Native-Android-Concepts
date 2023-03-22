@@ -6,7 +6,6 @@ import com.deepu.clearnArchitectureNoteApp.feature_note.domain.repository.NoteRe
 class DeleteNote(
     private val repository: NoteRepository
 ) {
-
     suspend operator fun invoke(note: Note) {
         repository.deleteNote(note)
     }

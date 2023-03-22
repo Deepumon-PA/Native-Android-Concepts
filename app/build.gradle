@@ -163,44 +163,53 @@ protobuf {
 
 dependencies {
 
+    constraints {
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0") {
+            because("kotlin-stdlib-jdk7 is now a part of kotlin-stdlib")
+        }
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0") {
+            because("kotlin-stdlib-jdk8 is now a part of kotlin-stdlib")
+        }
+    }
+
     implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.appcompat:appcompat:1.5.1'
-    implementation 'com.google.android.material:material:1.6.1'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.0'
     implementation 'androidx.activity:activity-compose:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     // Local unit tests
-    testImplementation "androidx.test:core:1.4.0"
+    testImplementation "androidx.test:core:1.5.0"
     testImplementation "junit:junit:4.13.2"
-    testImplementation "androidx.arch.core:core-testing:2.1.0"
+    testImplementation "androidx.arch.core:core-testing:2.2.0"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4"
     testImplementation "com.google.truth:truth:1.1.3"
     testImplementation "com.squareup.okhttp3:mockwebserver:4.9.1"
     testImplementation "io.mockk:mockk:1.10.5"
-    debugImplementation "androidx.compose.ui:ui-test-manifest:1.4.0-alpha02"
+    debugImplementation "androidx.compose.ui:ui-test-manifest:1.4.0-rc01"
 
-    // Instrumentation tests
+//     Instrumentation tests
     androidTestImplementation 'com.google.dagger:hilt-android-testing:2.37'
     kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.38.1'
     androidTestImplementation "junit:junit:4.13.2"
     androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4"
-    androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
+    androidTestImplementation "androidx.arch.core:core-testing:2.2.0"
     androidTestImplementation "com.google.truth:truth:1.1.3"
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test:core-ktx:1.4.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test:core-ktx:1.5.0'
     androidTestImplementation "com.squareup.okhttp3:mockwebserver:4.9.1"
     androidTestImplementation "io.mockk:mockk-android:1.10.5"
-    androidTestImplementation 'androidx.test:runner:1.4.0'
+    androidTestImplementation 'androidx.test:runner:1.5.2'
 
 
     //Compose
-    implementation "androidx.compose.material:material:1.3.0-rc01"
-    implementation "androidx.compose.compiler:compiler:1.3.2"
-    implementation "androidx.compose.ui:ui-tooling-preview:1.3.0-rc01"
-    implementation 'androidx.activity:activity-compose:1.6.0'
-    debugImplementation "androidx.compose.ui:ui-tooling:1.3.0-rc01"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1"
+    implementation "androidx.compose.material:material:1.4.0-rc01"
+    implementation "androidx.compose.compiler:compiler:1.4.3"
+    implementation "androidx.compose.ui:ui-tooling-preview:1.4.0-rc01"
+    implementation 'androidx.activity:activity-compose:1.6.1'
+    debugImplementation "androidx.compose.ui:ui-tooling:1.4.0-rc01"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.6.0"
 
     /*implementation "androidx.compose.ui:ui:1.3.2"
     implementation "androidx.compose.material:material:1.3.2"
@@ -209,7 +218,7 @@ dependencies {
 //    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
 
     //compose live data
-    implementation 'androidx.compose.runtime:runtime-livedata:1.4.0-alpha02'
+    implementation 'androidx.compose.runtime:runtime-livedata:1.4.0-rc01'
 
 
     //Retrofit
@@ -220,15 +229,15 @@ dependencies {
     //ViewModel and LiveData
     def lifecycle_version = "2.2.0"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.0"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.6.0"
 
     //coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
 
     // Room
-    def room_version = "2.4.3"
+    def room_version = "2.5.0"
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version" // coroutine support for room
@@ -250,7 +259,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:4.8.0'
 
     //navigation
-    implementation "androidx.navigation:navigation-compose:2.6.0-alpha04" //navigation with compose
+    implementation "androidx.navigation:navigation-compose:2.6.0-alpha07" //navigation with compose
 
     //multidexing
     implementation("androidx.multidex:multidex:2.0.1")
@@ -274,7 +283,7 @@ dependencies {
     implementation("io.coil-kt:coil-compose:1.3.1")
 
     //work manager
-    def work_version = "2.7.1"
+    def work_version = "2.8.0"
     implementation "androidx.work:work-runtime-ktx:$work_version"
     //Future callback for WorkManager
     implementation "androidx.concurrent:concurrent-futures-ktx:1.1.0"
@@ -287,7 +296,7 @@ dependencies {
     implementation "androidx.paging:paging-guava:$paging_version"
 
     // optional - Jetpack Compose paging integration
-    implementation "androidx.paging:paging-compose:1.0.0-alpha17"
+    implementation "androidx.paging:paging-compose:1.0.0-alpha18"
 
     //Datastore Typed
     implementation "androidx.datastore:datastore:1.0.0"
@@ -313,7 +322,7 @@ dependencies {
     implementation "com.squareup.sqldelight:coroutines-extensions-jvm:$sql_delight_version"
 
     //to get lifecycle operations(when launching flows in coroutines)
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.6.0"
 
     // Koin
     def koin_version = "2.0.1"
@@ -333,7 +342,7 @@ dependencies {
     implementation 'com.google.mlkit:translate:17.0.1'
 
     //base line profiles
-    implementation "androidx.profileinstaller:profileinstaller:1.3.0-alpha02"
+    implementation "androidx.profileinstaller:profileinstaller:1.3.0-rc01"
 
     //Block store
     implementation 'com.google.android.gms:play-services-auth-blockstore:16.2.0'

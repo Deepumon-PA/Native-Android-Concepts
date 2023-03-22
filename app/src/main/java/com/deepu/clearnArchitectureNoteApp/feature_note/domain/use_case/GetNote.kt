@@ -6,7 +6,6 @@ import com.deepu.clearnArchitectureNoteApp.feature_note.domain.repository.NoteRe
 class GetNote(
     private val repository: NoteRepository
 ) {
-
     suspend operator fun invoke(id: Int): Note? {
         return repository.getNoteById(id)
     }

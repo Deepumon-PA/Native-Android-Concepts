@@ -61,7 +61,7 @@ class ComposeBottomSheetDemo : ComponentActivity() {
                                 }
                             }
                         }) {
-                            Text(text = "Bottom sheet fraction: ${sheetState.progress.fraction}")
+                            Text(text = "Bottom sheet fraction: ${sheetState.progress}")
                         }
                     }
                 }
